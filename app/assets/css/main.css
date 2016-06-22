@@ -3,7 +3,7 @@ html, body {
   padding: 0;
   background: #FAFAFA;
   font-family: Arial;
-  font-size: 30px;
+  font-size: 15px;
   color: #333;
 }
 
@@ -18,14 +18,35 @@ html, body {
   margin: 0 auto;
 }
 
+.agency-wrapper {
+  height: 40px;
+  width: 100%;
+}
+
+.property-main-image {
+  width: 100%;
+  height:100%;
+}
+
+.property-main-image img {
+  width: 100%;
+}
+
+.agency-logo {
+  height: 20px;
+  margin: 10px;
+}
+
+.property-information {
+  padding: 10px 10px;
+}
+
 .property-card-wrapper {
   background: #FFF;
   border-radius: 3px;
   box-shadow: 0 3px 4px rgba(0,0,0,0.3);
   margin: 20px 0;
-  height: 120px;
-  display: flex;
   align-items: center;
   justify-content: space-around;
-  cursor: pointer;
+  overflow: hidden;
 }
