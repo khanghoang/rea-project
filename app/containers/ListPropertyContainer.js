@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ListPropertyComponent } from '../components/ListPropertyComponent';
-import nock from 'nock';
 import listProperties from '../../mockData/listProperties';
 
 
