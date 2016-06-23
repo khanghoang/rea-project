@@ -10,6 +10,7 @@
   "author": "hoangtrieukhang@gmail.com",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.4.1",
     "lodash": "^4.13.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
