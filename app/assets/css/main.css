@@ -41,6 +41,12 @@ html, body {
   padding: 10px 10px;
 }
 
+.button {
+  margin-top: -5px;
+  padding: 3px 15px;
+  float: right;
+}
+
 .property-card-wrapper {
   background: #FFF;
   border-radius: 3px;

@@ -2,11 +2,40 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 
 export default class PropertyCard extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      showButton: false
+    }
+  }
+
+  onMouseEnter = (e) => {
+    e.stopPropagation();
+    this.setState({showButton: true});
+  }
+
+  onMouseLeave = (e) => {
+    e.stopPropagation();
+    this.setState({showButton: false});
+  }
+
   render() {
+
+    const addOrRemoveButton = (
+      <button
+        className='button'
+        onMouseEnter={this.onMouseEnter}>
+        {this.props.isSaved ? 'Remove' : 'Add'}
+      </button>
+    );
+
     return (
       <div
         className='property-card-wrapper'
-        onClick={this.props.onClick} >
+        onClick={this.props.onClick}
+        onMouseOver={this.onMouseEnter}
+        onMouseOut={this.onMouseLeave} >
         <div
           className='agency-wrapper'
           style={{backgroundColor: this.props.agencyPrimaryColor || 'white'}}
@@ -21,6 +50,7 @@ export default class PropertyCard extends Component {
         </div>
         <div className='property-information'>
           <span>Price: {this.props.price || 'TBD'}</span>
+          {this.state.showButton ? addOrRemoveButton : null}
         </div>
       </div>
     )
