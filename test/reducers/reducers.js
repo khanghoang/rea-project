@@ -30,7 +30,7 @@ const state = {
 }
 
 
-describe('Main reducer', () => {
+describe('MAIN REDUCER', () => {
   it('should have default state', () => {
     const expected = {};
     const actual = reducers({}, {type: 'null-action'});
@@ -96,22 +96,54 @@ describe('Main reducer', () => {
     expect(actual).to.deep.equal(expected);
   });
 
-  it('will override property when SAVE_PROPERTY_SUCCESS', () => {
-    const savedProperty = {
-      "price": "$726,500",
-      "agency": {
-        "brandingColors": {
-          "primary": "#ffe512"
-        },
-        "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
-      },
-      "id": "1",
-      "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-      "saved": true
-    };
+  context('SAVE PROPERTY', () => {
 
-    const expected = {
-      "1": {
+    it('will return current state when there is no "property.id" in the response', () => {
+      const response = {
+        "price": "$726,500",
+        "agency": {
+          "brandingColors": {
+            "primary": "#ffe512"
+          },
+          "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+        },
+        "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+        "saved": true
+      };
+
+      const state = {
+        "1": {
+          "price": "$726,500",
+          "agency": {
+            "brandingColors": {
+              "primary": "#ffe512"
+            },
+            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+          },
+          "id": "1",
+          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+          "saved": true
+        },
+        "2": {
+          "price": "$726,500",
+          "agency": {
+            "brandingColors": {
+              "primary": "#ffe512"
+            },
+            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+          },
+          "id": "1",
+          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+          "saved": true
+        },
+      }
+
+      const actual = reducers(state, {type: actions.SAVE_PROPERTY_SUCCESS, data: response});
+      expect(actual).to.deep.equal(state);
+    });
+
+    it('will override property when SAVE_PROPERTY_SUCCESS', () => {
+      const savedProperty = {
         "price": "$726,500",
         "agency": {
           "brandingColors": {
@@ -122,8 +154,46 @@ describe('Main reducer', () => {
         "id": "1",
         "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
         "saved": true
-      },
-      "2": {
+      };
+
+      const expected = {
+        "1": {
+          "price": "$726,500",
+          "agency": {
+            "brandingColors": {
+              "primary": "#ffe512"
+            },
+            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+          },
+          "id": "1",
+          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+          "saved": true
+        },
+        "2": {
+          "price": "$726,500",
+          "agency": {
+            "brandingColors": {
+              "primary": "#ffe512"
+            },
+            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+          },
+          "id": "1",
+          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+          "saved": true
+        },
+      }
+
+      const actual = reducers(state, {type: actions.SAVE_PROPERTY_SUCCESS, data: savedProperty});
+      expect(actual).to.deep.equal(expected);
+
+    });
+
+  })
+
+  context('UNSAVE PROPERTY', () => {
+
+    it('will return current state when there is no "property.id" in the response', () => {
+      const response = {
         "price": "$726,500",
         "agency": {
           "brandingColors": {
@@ -131,33 +201,42 @@ describe('Main reducer', () => {
           },
           "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
         },
-        "id": "1",
         "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
         "saved": true
-      },
-    }
+      };
 
-    const actual = reducers(state, {type: actions.SAVE_PROPERTY_SUCCESS, data: savedProperty});
-    expect(actual).to.deep.equal(expected);
-
-  });
-
-  it('will override property when UNSAVE_PROPERTY_SUCCESS', () => {
-    const unsavedProperty = {
-      "price": "$726,500",
-      "agency": {
-        "brandingColors": {
-          "primary": "#ffe512"
+      const state = {
+        "1": {
+          "price": "$726,500",
+          "agency": {
+            "brandingColors": {
+              "primary": "#ffe512"
+            },
+            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+          },
+          "id": "1",
+          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+          "saved": true
         },
-        "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
-      },
-      "id": "1",
-      "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-      "saved": false
-    };
+        "2": {
+          "price": "$726,500",
+          "agency": {
+            "brandingColors": {
+              "primary": "#ffe512"
+            },
+            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+          },
+          "id": "1",
+          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+          "saved": true
+        },
+      }
 
-    const expected = {
-      "1": {
+      const actual = reducers(state, {type: actions.UNSAVE_PROPERTY_SUCCESS, data: response});
+      expect(actual).to.deep.equal(state);
+    });
+    it('will override property when UNSAVE_PROPERTY_SUCCESS', () => {
+      const unsavedProperty = {
         "price": "$726,500",
         "agency": {
           "brandingColors": {
@@ -168,24 +247,39 @@ describe('Main reducer', () => {
         "id": "1",
         "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
         "saved": false
-      },
-      "2": {
-        "price": "$726,500",
-        "agency": {
-          "brandingColors": {
-            "primary": "#ffe512"
-          },
-          "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
-        },
-        "id": "1",
-        "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-        "saved": true
-      },
-    }
+      };
 
-    const actual = reducers(state, {type: actions.UNSAVE_PROPERTY_SUCCESS, data: unsavedProperty});
-    expect(actual).to.deep.equal(expected);
+      const expected = {
+        "1": {
+          "price": "$726,500",
+          "agency": {
+            "brandingColors": {
+              "primary": "#ffe512"
+            },
+            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+          },
+          "id": "1",
+          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+          "saved": false
+        },
+        "2": {
+          "price": "$726,500",
+          "agency": {
+            "brandingColors": {
+              "primary": "#ffe512"
+            },
+            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+          },
+          "id": "1",
+          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+          "saved": true
+        },
+      }
+
+      const actual = reducers(state, {type: actions.UNSAVE_PROPERTY_SUCCESS, data: unsavedProperty});
+      expect(actual).to.deep.equal(expected);
+
+    });
 
   });
-
 })

@@ -11,7 +11,6 @@ export default function(state = {}, action) {
           properties: action.data
         }
       );
-      break;
     }
 
     case propertyActions.SAVE_PROPERTY_SUCCESS:
@@ -29,12 +28,10 @@ export default function(state = {}, action) {
         state,
         savedProperty
       );
-      break;
     }
 
     default: {
       return state;
-      break;
     }
   }
 }
