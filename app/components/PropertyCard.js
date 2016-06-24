@@ -20,12 +20,21 @@ export default class PropertyCard extends Component {
     this.setState({showButton: false});
   }
 
+  onClick = (e) => {
+    if (!this.props.isSaved) {
+      this.props.onClickSave && this.props.onClickSave(this.props.id);
+    } else {
+      this.props.onClickRemove && this.props.onClickRemove(this.props.id);
+    }
+  }
+
   render() {
 
     const addOrRemoveButton = (
       <button
         className='button'
-        onMouseEnter={this.onMouseEnter}>
+        onMouseEnter={this.onMouseEnter}
+        onClick={this.onClick}>
         {this.props.isSaved ? 'Remove' : 'Add'}
       </button>
     );

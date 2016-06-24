@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 export default class ListPropertyComponent extends Component {
   render() {
+    const { properties, ...rest } = this.props;
     const cards = this.props.properties.map(p => {
       return (
         <PropertyCard
@@ -12,6 +13,9 @@ export default class ListPropertyComponent extends Component {
           mainImage={_.get(p, 'mainImage', '')}
           agencyLogo={_.get(p, 'agency.logo', '')}
           price={_.get(p, 'price', 'TBD')}
+          id={p.id}
+          isSaved={p.saved}
+          {...rest}
           />
       )
     });
