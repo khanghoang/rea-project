@@ -24,12 +24,12 @@ describe('<ListPropertyContainer />', () => {
 
   });
 
-  it('should show 4 properties after done with fetching', () => {
+  it('should show 3 properties after done with fetching', () => {
     const list = mount(
       <Provider store={store}>
         <ListPropertyContainer />
       </Provider>
     );
-    expect(list.find('.property-card-wrapper').length).to.equal(4);
+    expect(list.find('.property-card-wrapper').length).to.equal(3);
   });
 });
