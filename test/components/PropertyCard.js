@@ -7,15 +7,29 @@ import ReactTestUtils from 'react-addons-test-utils';
 
 describe('<PropertyCard />', () => {
 
-  it('should call callback function when be tapped', () => {
+  it('should call save callback if property is UNSAVED', () => {
     const cb = spy();
     const propertyCard = mount(
       <PropertyCard
-        onClick={cb}
+        onClickSave={cb}
+        isSaved={false}
         />
     )
 
-    propertyCard.find('.property-card-wrapper').simulate('click');
+    propertyCard.find('.add-remove-button').simulate('click');
+    expect(cb.calledOnce).to.be.true;
+  });
+
+  it('should call remove callback if property is SAVED', () => {
+    const cb = spy();
+    const propertyCard = mount(
+      <PropertyCard
+        onClickRemove={cb}
+        isSaved={true}
+        />
+    )
+
+    propertyCard.find('.add-remove-button').simulate('click');
     expect(cb.calledOnce).to.be.true;
   });
 
