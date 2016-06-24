@@ -69,7 +69,9 @@ class ListPropertyContainer extends Component {
   render() {
 
     let content = null;
+    let switchButtonTitle = 'Show saved properties';
     if (this.state.isShowingSavedOne) {
+      switchButtonTitle = 'Show other properties';
       content = (
         <ListPropertyComponent
           properties={ this.props.savedProperties }
@@ -89,7 +91,10 @@ class ListPropertyContainer extends Component {
 
     return (
       <div>
-        <button onClick={this.toggleShowSaved}>Show saved properties</button>
+        <button
+          onClick={this.toggleShowSaved}>
+          { switchButtonTitle }
+        </button>
         { content }
       </div>
     )
