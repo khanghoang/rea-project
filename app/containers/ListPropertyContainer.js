@@ -91,10 +91,11 @@ class ListPropertyContainer extends Component {
 
     return (
       <div>
-        <button
+        <div
+          className='toggle-button button primary-button'
           onClick={this.toggleShowSaved}>
           { switchButtonTitle }
-        </button>
+        </div>
         { content }
       </div>
     )

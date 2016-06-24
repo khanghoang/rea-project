@@ -41,10 +41,46 @@ html, body {
   padding: 10px 10px;
 }
 
-.button {
+.add-remove-button {
   margin-top: -5px;
   padding: 3px 15px;
   float: right;
+  box-shadow: none !important;
+  display: none;
+}
+
+.add-button {
+  background-color: green;
+  color: white;
+}
+
+.remove-button {
+  background-color: red;
+  color: white;
+}
+
+.primary-button {
+  background-color: blue;
+  color: white;
+}
+
+.toggle-button {
+  margin: 20px auto 0 auto;
+  display: block;
+  padding: 5px 10px;
+  width: 150px;
+  font-size: 10px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.property-card-wrapper:hover .add-remove-button {
+  display: block;
+}
+
+.button {
+  border-radius: 3px;
+  box-shadow: 0 3px 4px rgba(0,0,0,0.3);
 }
 
 .property-card-wrapper {

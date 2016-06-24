@@ -3,23 +3,6 @@ import _ from 'lodash';
 
 export default class PropertyCard extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      showButton: false
-    }
-  }
-
-  onMouseEnter = (e) => {
-    e.stopPropagation();
-    this.setState({showButton: true});
-  }
-
-  onMouseLeave = (e) => {
-    e.stopPropagation();
-    this.setState({showButton: false});
-  }
-
   onClick = (e) => {
     if (!this.props.isSaved) {
       this.props.onClickSave && this.props.onClickSave(this.props.id);
@@ -29,22 +12,18 @@ export default class PropertyCard extends Component {
   }
 
   render() {
-
     const addOrRemoveButton = (
-      <button
-        className='button'
-        onMouseEnter={this.onMouseEnter}
+      <div
+        className={`add-remove-button button ${this.props.isSaved ? 'remove-button' : 'add-button'}`}
         onClick={this.onClick}>
         {this.props.isSaved ? 'Remove' : 'Add'}
-      </button>
+      </div>
     );
 
     return (
       <div
         className='property-card-wrapper'
-        onClick={this.props.onClick}
-        onMouseOver={this.onMouseEnter}
-        onMouseOut={this.onMouseLeave} >
+        onClick={this.props.onClick}>
         <div
           className='agency-wrapper'
           style={{backgroundColor: this.props.agencyPrimaryColor || 'white'}}
@@ -59,7 +38,7 @@ export default class PropertyCard extends Component {
         </div>
         <div className='property-information'>
           <span>Price: {this.props.price || 'TBD'}</span>
-          {this.state.showButton ? addOrRemoveButton : null}
+          { addOrRemoveButton }
         </div>
       </div>
     )
