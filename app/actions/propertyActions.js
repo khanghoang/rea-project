@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
 import _ from 'lodash';
-import listProperties from '../../mockData/listProperties';
+import listProperties from '../mockData/listProperties';
 
 export const GET_PROPERTY_LIST = 'GET_PROPERTY_LIST';
 export const GET_PROPERTY_LIST_SUCCESS = 'GET_PROPERTY_LIST_SUCCESS';
