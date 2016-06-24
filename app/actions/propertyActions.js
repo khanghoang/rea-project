@@ -28,7 +28,6 @@ const parseListProperty = (res) => {
 }
 
 const listProperties = parseListProperty(mockData);
-console.log(listProperties);
 
 export const fetchPropertyList = () => {
 
