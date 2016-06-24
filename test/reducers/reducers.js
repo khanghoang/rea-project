@@ -3,30 +3,32 @@ import { expect } from 'chai';
 import * as actions from '../../app/actions/propertyActions';
 
 const state = {
-  "1": {
-    "price": "$726,500",
-    "agency": {
-      "brandingColors": {
-        "primary": "#ffe512"
+  properties: {
+    "1": {
+      "price": "$726,500",
+      "agency": {
+        "brandingColors": {
+          "primary": "#ffe512"
+        },
+        "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
       },
-      "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+      "id": "1",
+      "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+      "saved": true
     },
-    "id": "1",
-    "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-    "saved": true
-  },
-  "2": {
-    "price": "$726,500",
-    "agency": {
-      "brandingColors": {
-        "primary": "#ffe512"
+    "2": {
+      "price": "$726,500",
+      "agency": {
+        "brandingColors": {
+          "primary": "#ffe512"
+        },
+        "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
       },
-      "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+      "id": "1",
+      "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+      "saved": true
     },
-    "id": "1",
-    "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-    "saved": true
-  },
+  }
 }
 
 
@@ -99,46 +101,36 @@ describe('MAIN REDUCER', () => {
   context('SAVE PROPERTY', () => {
 
     it('will return current state when there is no "property.id" in the response', () => {
-      const response = {
-        "price": "$726,500",
-        "agency": {
-          "brandingColors": {
-            "primary": "#ffe512"
-          },
-          "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
-        },
-        "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-        "saved": true
-      };
-
       const state = {
-        "1": {
-          "price": "$726,500",
-          "agency": {
-            "brandingColors": {
-              "primary": "#ffe512"
+        properties: {
+          "1": {
+            "price": "$726,500",
+            "agency": {
+              "brandingColors": {
+                "primary": "#ffe512"
+              },
+              "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
             },
-            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+            "id": "1",
+            "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+            "saved": false
           },
-          "id": "1",
-          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-          "saved": true
-        },
-        "2": {
-          "price": "$726,500",
-          "agency": {
-            "brandingColors": {
-              "primary": "#ffe512"
+          "2": {
+            "price": "$726,500",
+            "agency": {
+              "brandingColors": {
+                "primary": "#ffe512"
+              },
+              "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
             },
-            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+            "id": "1",
+            "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+            "saved": true
           },
-          "id": "1",
-          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-          "saved": true
-        },
+        }
       }
 
-      const actual = reducers(state, {type: actions.SAVE_PROPERTY_SUCCESS, data: response});
+      const actual = reducers(state, {type: actions.SAVE_PROPERTY_SUCCESS, data: null});
       expect(actual).to.deep.equal(state);
     });
 
@@ -157,30 +149,32 @@ describe('MAIN REDUCER', () => {
       };
 
       const expected = {
-        "1": {
-          "price": "$726,500",
-          "agency": {
-            "brandingColors": {
-              "primary": "#ffe512"
+        properties: {
+          "1": {
+            "price": "$726,500",
+            "agency": {
+              "brandingColors": {
+                "primary": "#ffe512"
+              },
+              "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
             },
-            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+            "id": "1",
+            "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+            "saved": true
           },
-          "id": "1",
-          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-          "saved": true
-        },
-        "2": {
-          "price": "$726,500",
-          "agency": {
-            "brandingColors": {
-              "primary": "#ffe512"
+          "2": {
+            "price": "$726,500",
+            "agency": {
+              "brandingColors": {
+                "primary": "#ffe512"
+              },
+              "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
             },
-            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+            "id": "1",
+            "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+            "saved": true
           },
-          "id": "1",
-          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-          "saved": true
-        },
+        }
       }
 
       const actual = reducers(state, {type: actions.SAVE_PROPERTY_SUCCESS, data: savedProperty});
@@ -193,46 +187,36 @@ describe('MAIN REDUCER', () => {
   context('UNSAVE PROPERTY', () => {
 
     it('will return current state when there is no "property.id" in the response', () => {
-      const response = {
-        "price": "$726,500",
-        "agency": {
-          "brandingColors": {
-            "primary": "#ffe512"
-          },
-          "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
-        },
-        "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-        "saved": true
-      };
-
       const state = {
-        "1": {
-          "price": "$726,500",
-          "agency": {
-            "brandingColors": {
-              "primary": "#ffe512"
+        properties: {
+          "1": {
+            "price": "$726,500",
+            "agency": {
+              "brandingColors": {
+                "primary": "#ffe512"
+              },
+              "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
             },
-            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+            "id": "1",
+            "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+            "saved": true
           },
-          "id": "1",
-          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-          "saved": true
-        },
-        "2": {
-          "price": "$726,500",
-          "agency": {
-            "brandingColors": {
-              "primary": "#ffe512"
+          "2": {
+            "price": "$726,500",
+            "agency": {
+              "brandingColors": {
+                "primary": "#ffe512"
+              },
+              "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
             },
-            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+            "id": "1",
+            "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+            "saved": true
           },
-          "id": "1",
-          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-          "saved": true
-        },
+        }
       }
 
-      const actual = reducers(state, {type: actions.UNSAVE_PROPERTY_SUCCESS, data: response});
+      const actual = reducers(state, {type: actions.UNSAVE_PROPERTY_SUCCESS, data: null});
       expect(actual).to.deep.equal(state);
     });
     it('will override property when UNSAVE_PROPERTY_SUCCESS', () => {
@@ -250,30 +234,32 @@ describe('MAIN REDUCER', () => {
       };
 
       const expected = {
-        "1": {
-          "price": "$726,500",
-          "agency": {
-            "brandingColors": {
-              "primary": "#ffe512"
+        properties: {
+          "1": {
+            "price": "$726,500",
+            "agency": {
+              "brandingColors": {
+                "primary": "#ffe512"
+              },
+              "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
             },
-            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+            "id": "1",
+            "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+            "saved": false
           },
-          "id": "1",
-          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-          "saved": false
-        },
-        "2": {
-          "price": "$726,500",
-          "agency": {
-            "brandingColors": {
-              "primary": "#ffe512"
+          "2": {
+            "price": "$726,500",
+            "agency": {
+              "brandingColors": {
+                "primary": "#ffe512"
+              },
+              "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
             },
-            "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+            "id": "1",
+            "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+            "saved": true
           },
-          "id": "1",
-          "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-          "saved": true
-        },
+        }
       }
 
       const actual = reducers(state, {type: actions.UNSAVE_PROPERTY_SUCCESS, data: unsavedProperty});

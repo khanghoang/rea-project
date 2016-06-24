@@ -87,8 +87,10 @@ describe('Property list action', () => {
         "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
       },
       "id": "1",
-      "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg"
+      "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
+      "saved": true
     }
+
     const expectedActions = [
       {
         type: actions.SAVE_PROPERTY
@@ -100,7 +102,7 @@ describe('Property list action', () => {
     ];
 
     const store = mockStore({});
-    return store.dispatch(actions.saveProperty(property))
+    return store.dispatch(actions.saveProperty(property.id))
     .then(() => {
       expect(store.getActions()).to.deep.equal(expectedActions);
     });
@@ -121,16 +123,16 @@ describe('Property list action', () => {
     }
     const expectedActions = [
       {
-        type: actions.SAVE_PROPERTY
+        type: actions.UNSAVE_PROPERTY
       },
       {
-        type: actions.SAVE_PROPERTY_SUCCESS,
+        type: actions.UNSAVE_PROPERTY_SUCCESS,
         data: _.assign({}, property, {saved: false})
       }
     ];
 
     const store = mockStore({});
-    return store.dispatch(actions.unsaveProperty(property))
+    return store.dispatch(actions.unsaveProperty(property.id))
     .then(() => {
       expect(store.getActions()).to.deep.equal(expectedActions);
     });

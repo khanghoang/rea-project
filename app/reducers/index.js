@@ -13,20 +13,31 @@ export default function(state = {properties: {}}, action) {
       );
     }
 
-    case propertyActions.SAVE_PROPERTY_SUCCESS:
-    case propertyActions.UNSAVE_PROPERTY_SUCCESS: {
-
+    case propertyActions.SAVE_PROPERTY_SUCCESS: {
       const id = _.get(action, 'data.id', null);
       if (!id) {
         return state;
       }
 
-      const savedProperty = {};
-      savedProperty[action.data.id] = action.data;
+      state.properties[id] = action.data;
+
       return _.assign(
         {},
-        state,
-        savedProperty
+        state
+      );
+    }
+
+    case propertyActions.UNSAVE_PROPERTY_SUCCESS: {
+      const id = _.get(action, 'data.id', null);
+      if (!id) {
+        return state;
+      }
+
+      state.properties[id] = action.data;
+
+      return _.assign(
+        {},
+        state
       );
     }
 
@@ -34,4 +45,22 @@ export default function(state = {properties: {}}, action) {
       return state;
     }
   }
+}
+
+const convertPropertiesToArray = (properties) => {
+  return _.chain(properties)
+  .map(p => {
+    return p;
+  })
+  .sortBy(p => {
+    return p.id;
+  }).value();
+}
+
+export const getSavedProperties = (state) => {
+  return _.filter(convertPropertiesToArray(state.properties), p => p.saved);
+}
+
+export const getResultProperties = (state) => {
+  return _.filter(convertPropertiesToArray(state.properties), p => !p.saved);
 }
