@@ -14,6 +14,8 @@ const configureStore = () => {
     reducers,
     applyMiddleware(...middlewares)
   )
+
+  return store;
 }
 
 export default configureStore;
