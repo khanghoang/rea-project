@@ -1,13 +1,13 @@
 import {
   mount
 } from 'enzyme';
-import App from '../../app/containers/App';
+import Root from '../../app/containers/Root';
 import { expect } from 'chai';
 import React from 'react';
 
-describe('<App />', () => {
+describe('<Root />', () => {
   it('should render main app component', () => {
-    const app = mount(<App />);
-    expect(app.find('.main-app').length).to.be.equal(1);
+    const root = mount(<Root />);
+    expect(root.find('.main-app')).to.exist;
   });
 });
