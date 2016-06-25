@@ -11,7 +11,11 @@ const timeout = () => {
 }
 
 const handler = (resolve, reject) => {
-  return window.__setFailure ? reject : resolve;
+  if (window.__setFailure) {
+    reject(new Error('There is an error, please try again'));
+    return function() {}
+  }
+  return resolve;
 }
 
 const parseListProperty = (res) => {
