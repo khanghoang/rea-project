@@ -88,7 +88,7 @@ describe('Property list action', () => {
       },
       "id": "1",
       "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg",
-      "saved": true
+      "saved": false
     }
 
     const expectedActions = [

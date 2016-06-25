@@ -6,6 +6,14 @@ export const GET_PROPERTY_LIST = 'GET_PROPERTY_LIST';
 export const GET_PROPERTY_LIST_SUCCESS = 'GET_PROPERTY_LIST_SUCCESS';
 export const GET_PROPERTY_LIST_FAILURE = 'GET_PROPERTY_LIST_FAILURE';
 
+const timeout = () => {
+  return window.__deplay ? 3000 : 0;
+}
+
+const handler = (resolve, reject) => {
+  return window.__setFailure ? reject : resolve;
+}
+
 const parseListProperty = (res) => {
 
   const resultArray = _.reduce(res.results, (acc, p) => {
@@ -40,8 +48,8 @@ export const fetchPropertyList = () => {
     promise: () => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          resolve(listProperties);
-        }, 0)
+          handler(resolve, reject)(listProperties);
+        }, timeout())
       });
     }
   }
@@ -61,8 +69,8 @@ export const saveProperty = (propertyID) => {
     promise: () => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          resolve(_.assign({}, listProperties[propertyID], {saved: true}));
-        }, 0)
+          handler(resolve, reject)(_.assign({}, listProperties[propertyID], {saved: true}));
+        }, timeout())
       })
     }
   }
@@ -82,8 +90,8 @@ export const unsaveProperty = (propertyID) => {
     promise: () => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          resolve(_.assign({}, listProperties[propertyID], {saved: false}));
-        }, 0)
+          handler(resolve, reject)(_.assign({}, listProperties[propertyID], {saved: false}));
+        }, timeout())
       })
     }
   }
