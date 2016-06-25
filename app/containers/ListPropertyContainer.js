@@ -32,7 +32,7 @@ function mapDispatchToProps(dispatch) {
   }, dispatch);
 }
 
-class ListPropertyContainer extends Component {
+export class ListPropertyContainer extends Component {
 
   constructor() {
     super();
@@ -42,6 +42,10 @@ class ListPropertyContainer extends Component {
   }
 
   componentDidMount() {
+    if (!this.props.fetchPropertyList ) {
+      return;
+    }
+
     this.fetchListPromise = this.props.fetchPropertyList();
     this.fetchListPromise
     .then(res => {
