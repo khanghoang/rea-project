@@ -72,6 +72,19 @@ describe('<PropertyCard />', () => {
     expect(cb.calledOnce).to.be.true;
   });
 
+  it(`shouldn't get called while loading`, () => {
+    const cb = spy();
+    const propertyCard = mount(
+      <PropertyCard
+        onClickRemove={cb}
+        isSaved={true}
+        disabledButton={true}
+        />
+    )
+
+    propertyCard.find('.add-remove-button').simulate('click');
+    expect(cb.calledOnce).to.be.false;
+  });
   describe('with mailformed data', () => {
     const card = mount(<PropertyCard />);
 
