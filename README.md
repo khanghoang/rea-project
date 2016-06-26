@@ -25,5 +25,5 @@
 <img src="https://cloud.githubusercontent.com/assets/3213579/16363768/2a407610-3bff-11e6-8a95-c1193aa60f39.gif" width="400">
 
 - Enable response delay and set requests to return error by clinking top button:  
-<img src="https://cloud.githubusercontent.com/assets/3213579/16363791/f873abe2-3bff-11e6-89f4-d054916be4f5.gif" style="text-align: center; margin: 0 auto;">
+<img src="https://cloud.githubusercontent.com/assets/3213579/16363805/8c0df9fc-3c00-11e6-9093-eeab42624f8b.gif" style="text-align: center; margin: 0 auto;">
 
