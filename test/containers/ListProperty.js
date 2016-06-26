@@ -9,6 +9,8 @@ let store;
 
 beforeEach(() => {
   store = configureStore();
+  window.__deplay = false;
+  window.__setFailure = false;
 });
 
 describe('<ListPropertyContainer />', () => {
@@ -122,6 +124,50 @@ describe('<ListPropertyContainer />', () => {
         done();
       }, 100);
 
+    }, 100)
+  });
+
+  it(`should change property's title when user clicks on ADD button`, (done) => {
+    const list = mount(
+      <Provider store={store}>
+        <ListPropertyContainerConnnect />
+      </Provider>
+    );
+
+    window.__deplay = true;
+
+    // because saving card is async
+    setTimeout(() => {
+      // simulate to add
+      list.find('.property-card-wrapper').first().find('.add-remove-button').first().simulate('click');
+      setTimeout(() => {
+        const button = list.find('.property-card-wrapper').first().find('.add-remove-button').first();
+        expect(button.text()).to.equal('Adding...');
+        done();
+      }, 200);
+    }, 100)
+  });
+
+  it(`should change property's title when user clicks on REMOVE button`, (done) => {
+    const list = mount(
+      <Provider store={store}>
+        <ListPropertyContainerConnnect />
+      </Provider>
+    );
+
+    window.__deplay = true;
+
+    // because saving card is async
+    setTimeout(() => {
+      // show saved list
+      list.find('.toggle-button').first().simulate('click');
+      // simulate to remove
+      list.find('.property-card-wrapper').first().find('.add-remove-button').first().simulate('click');
+      setTimeout(() => {
+        const button = list.find('.property-card-wrapper').first().find('.add-remove-button').first();
+        expect(button.text()).to.equal('Removing...');
+        done();
+      }, 200);
     }, 100)
   });
 

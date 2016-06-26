@@ -81,8 +81,17 @@ html, body {
   text-align: center;
 }
 
+.button-disable {
+  opacity: 0.4;
+  display: inline-block !important;
+}
+
 .property-card-wrapper:hover .add-remove-button {
   display: block;
+}
+
+.property-card-wrapper .force-visible {
+  display: block !important;
 }
 
 .button {

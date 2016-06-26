@@ -20,6 +20,7 @@ export default class PropertyCard extends Component {
           'remove-button': this.props.isSaved,
           'add-button': !this.props.isSaved,
           'button-disable': this.props.disabledButton,
+          'force-visible': this.props.forceShowButton
         }
       );
 

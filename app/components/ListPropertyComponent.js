@@ -13,9 +13,8 @@ export default class ListPropertyComponent extends Component {
           mainImage={_.get(p, 'mainImage', '')}
           agencyLogo={_.get(p, 'agency.logo', '')}
           price={_.get(p, 'price', 'TBD')}
-          id={p.id}
           isSaved={p.saved}
-          showButton={p.showButton}
+          {...p}
           {...rest}
           />
       )

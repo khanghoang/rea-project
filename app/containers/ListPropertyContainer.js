@@ -39,6 +39,7 @@ export class ListPropertyContainer extends Component {
     this.state = {
       isShowingSavedOne: false
     }
+    this.promises = {};
   }
 
   componentDidMount() {
@@ -62,23 +63,76 @@ export class ListPropertyContainer extends Component {
     });
   }
 
+  componentWillUnmount() {
+    _.values(this.promises)
+    .forEach(p => p.cancel());
+  }
+
   onClickSave = (propertyID) => {
-    this.props.saveProperty(propertyID);
+    const savePromise = this.props.saveProperty(propertyID);
+    savePromise.__type = 'add';
+
+    this.promises[`${propertyID}`] = savePromise;
+    this && this.forceUpdate();
+
+    savePromise
+    .catch(err => {
+      console.log('therer is an error');
+    })
+    .finally(() => {
+      // FIXME: need to check if this component is unmounted
+      this && this.forceUpdate();
+      delete this.promises[`${propertyID}`];
+    })
   }
 
   onClickRemove = (propertyID) => {
-    this.props.unsaveProperty(propertyID);
+    const removePromise = this.props.unsaveProperty(propertyID);
+    removePromise.__type = 'remove';
+
+    this.promises[`${propertyID}`] = removePromise;
+    this && this.forceUpdate();
+
+    removePromise
+    .catch(err => {
+      console.log('therer is an error');
+    })
+    .finally(() => {
+      // FIXME: need to check if this component is unmounted
+      this && this.forceUpdate();
+      delete this.promises[`${propertyID}`];
+    })
+
   }
 
   render() {
 
     let content = null;
     let switchButtonTitle = 'Show saved properties';
+
+    const addStatesToArrayProperties = (arr) => {
+      return arr.map(p => {
+        const promise = this.promises[`${p.id}`];
+        if (promise && promise.isPending()) {
+          p.title = promise.__type === 'add' ? 'Adding...' : 'Removing...';
+          p.disabledButton = true;
+        }
+
+        if (promise && promise.isRejected()) {
+          p.title = `Oops, ${promise.__type} again?`;
+          p.disabledButton = false;
+          p.forceShowButton = true;
+        }
+
+        return p;
+      });
+    }
+
     if (this.state.isShowingSavedOne) {
       switchButtonTitle = 'Show other properties';
       content = (
         <ListPropertyComponent
-          properties={ this.props.savedProperties }
+          properties={ addStatesToArrayProperties(this.props.savedProperties) }
           onClickSave={ this.onClickSave }
           onClickRemove={ this.onClickRemove }
           />
@@ -86,7 +140,7 @@ export class ListPropertyContainer extends Component {
     } else {
       content = (
         <ListPropertyComponent
-          properties={ this.props.resultProperties }
+          properties={ addStatesToArrayProperties(this.props.resultProperties) }
           onClickSave={ this.onClickSave }
           onClickRemove={ this.onClickRemove }
           />
