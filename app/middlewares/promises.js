@@ -17,11 +17,11 @@ export default function promiseMiddleware ({dispatch, getState}) {
     return finalPromise
       .then(result => {
         dispatch({ ...rest, data: result, type: SUCCESS })
-        return result;
+        return Promise.resolve(result);
       })
       .catch(error => {
         dispatch({ ...rest, error, type: FAILURE })
-        return error;
+        return Promise.reject(error);
       })
 
   }
