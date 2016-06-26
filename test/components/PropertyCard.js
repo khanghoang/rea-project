@@ -20,6 +20,26 @@ describe('<PropertyCard />', () => {
     expect(cb.calledOnce).to.be.true;
   });
 
+  it('should hide button when showButton is false', () => {
+    const propertyCard = mount(
+      <PropertyCard
+        showButton={false}
+        />
+    )
+
+    expect(propertyCard.find('.add-remove-button')).to.not.exist;
+  });
+
+  it('should show button when showButton is true', () => {
+    const propertyCard = mount(
+      <PropertyCard
+        showButton={true}
+        />
+    )
+
+    expect(propertyCard.find('.add-remove-button')).to.exist;
+  });
+
   it('should call remove callback if property is SAVED', () => {
     const cb = spy();
     const propertyCard = mount(

@@ -15,6 +15,7 @@ export default class ListPropertyComponent extends Component {
           price={_.get(p, 'price', 'TBD')}
           id={p.id}
           isSaved={p.saved}
+          showButton={p.showButton}
           {...rest}
           />
       )

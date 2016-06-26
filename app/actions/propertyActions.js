@@ -20,15 +20,7 @@ const handler = (resolve, reject) => {
 
 const parseListProperty = (res) => {
 
-  const resultArray = _.reduce(res.results, (acc, p) => {
-
-    // assign `saved` to false
-    const newProperty = _.assign({}, p, {saved: false});
-    acc[p.id] = newProperty;
-    return acc;
-  }, {});
-
-  const savedArray = _.reduce(res.saved, (acc, p) => {
+  const saved = _.reduce(res.saved, (acc, p) => {
 
     // assign `saved` to true
     const newProperty = _.assign({}, p, {saved: true});
@@ -36,10 +28,37 @@ const parseListProperty = (res) => {
     return acc;
   }, {});
 
-  return _.assign({}, resultArray, savedArray);
+  const results = _.reduce(res.results, (acc, p) => {
+
+    // assign `saved` to false
+    const isSaved = saved[p.id] ? true : false;
+    const newProperty = _.assign({}, p, {saved: isSaved});
+    acc[p.id] = newProperty;
+    return acc;
+  }, {});
+
+  return _.assign({}, results, saved);
 }
 
 const listProperties = parseListProperty(mockData);
+
+
+// for fetch list property request
+const listPropertiesFromRemote = (res) => {
+
+  const transform = (arr) => {
+    return _.reduce(arr, (acc, p) => {
+      const newProperty = _.assign({}, p);
+      acc[p.id] = newProperty;
+      return acc;
+    }, {});
+  }
+
+  const results = transform(res.results);
+  const saved = transform(res.saved);
+
+  return _.assign({}, {results: results}, {saved: saved});
+}
 
 export const fetchPropertyList = () => {
 
@@ -52,7 +71,7 @@ export const fetchPropertyList = () => {
     promise: () => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          handler(resolve, reject)(listProperties);
+          handler(resolve, reject)(listPropertiesFromRemote(mockData));
         }, timeout())
       });
     }

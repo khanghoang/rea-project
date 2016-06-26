@@ -38,7 +38,7 @@ export default class PropertyCard extends Component {
         </div>
         <div className='property-information'>
           <span>Price: {this.props.price || 'TBD'}</span>
-          { addOrRemoveButton }
+          { this.props.showButton ? addOrRemoveButton : (<div></div>) }
         </div>
       </div>
     )
@@ -50,5 +50,10 @@ PropertyCard.propTypes = {
   backgroundColor: React.PropTypes.string,
   agencyLogo: React.PropTypes.string,
   mainImage: React.PropTypes.string,
-  price: React.PropTypes.string
+  price: React.PropTypes.string,
+  showButton: React.PropTypes.bool
+}
+
+PropertyCard.defaultProps = {
+  showButton: true
 }

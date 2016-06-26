@@ -1,14 +1,20 @@
 import * as propertyActions from '../actions/propertyActions';
 import _ from 'lodash';
 
-export default function(state = {properties: {}}, action) {
+const intialState = {
+  resutls: {},
+  saved: {}
+}
+
+export default function(state = intialState, action) {
   switch(action.type) {
 
     case propertyActions.GET_PROPERTY_LIST_SUCCESS: {
       return _.assign(
         {},
         {
-          properties: action.data
+          results: _.get(action.data, 'results', {}),
+          saved: _.get(action.data, 'saved', {})
         }
       );
     }
@@ -19,11 +25,12 @@ export default function(state = {properties: {}}, action) {
         return state;
       }
 
-      state.properties[id] = action.data;
+      const newState = _.assign({}, state);
+      _.set(newState, `saved.['${id}']`, action.data)
 
       return _.assign(
         {},
-        state
+        newState
       );
     }
 
@@ -33,11 +40,12 @@ export default function(state = {properties: {}}, action) {
         return state;
       }
 
-      state.properties[id] = action.data;
+      const newState = _.assign({}, state);
+      delete newState.saved[id];
 
       return _.assign(
         {},
-        state
+        newState
       );
     }
 
@@ -58,9 +66,25 @@ const convertPropertiesToArray = (properties) => {
 }
 
 export const getSavedProperties = (state) => {
-  return _.filter(convertPropertiesToArray(state.properties), p => p.saved);
+  return convertPropertiesToArray(state.saved)
+  .map(p => {
+    p.saved = true;
+    return p;
+  });
 }
 
 export const getResultProperties = (state) => {
-  return _.filter(convertPropertiesToArray(state.properties), p => !p.saved);
+  return convertPropertiesToArray(state.results)
+  .map(p => {
+    p.showButton = true;
+
+    // if it is in saved list
+    if (state.saved[p.id]) {
+
+      // hide add button
+      p.showButton = false;
+    }
+
+    return p;
+  })
 }
