@@ -62,12 +62,19 @@ html, body {
 .primary-button {
   background-color: blue;
   color: white;
+  padding: 5px 10px;
+  width: 150px;
+  font-size: 10px;
+  line-height: 20px;
+  text-align: center;
 }
 
+.enable-delay-button,
+.enable-failure-button,
 .toggle-button {
-  margin: 20px auto 0 auto;
+  margin: 10px auto 0 auto;
   display: block;
-  padding: 5px 10px;
+  padding: 5px 5px;
   width: 150px;
   font-size: 10px;
   line-height: 20px;

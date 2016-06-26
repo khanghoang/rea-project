@@ -21,15 +21,15 @@ class App extends Component {
     return (
       <div className='main-app'>
         <div
-          className='button primary-button'
+          className='button primary-button enable-delay-button'
           onClick={this.enableDelay}>
           {window.__deplay ? 'Disable delay' : 'Enable delay 3s'}
-        </div>
-        <div
-          className='button primary-button'
-          onClick={this.enableFailure}>
-          {window.__setFailure ? 'Disable failure' : 'Enable failure'}
-        </div>
+          </div>
+          <div
+            className='button primary-button enable-failure-button'
+            onClick={this.enableFailure}>
+            {window.__setFailure ? 'Disable failure' : 'Enable failure'}
+            </div>
         <ListPropertyContainer />
       </div>
     );
