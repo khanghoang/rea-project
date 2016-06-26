@@ -124,6 +124,11 @@ export class ListPropertyContainer extends Component {
           p.forceShowButton = true;
         }
 
+        if (promise && promise.isFulfilled()) {
+          p.title = '';
+          p.disabledButton = false;
+        }
+
         return p;
       });
     }
