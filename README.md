@@ -1,5 +1,5 @@
 # 🦄 rea-project
-[![Test](https://travis-ci.org/khanghoang/rea-project.svg?branch=master)](https://travis-ci.org/khanghoang/rea-project)
+[![Build Status](https://travis-ci.org/khanghoang/rea-project.svg?branch=master)](https://travis-ci.org/khanghoang/rea-project)
 [![Coverage Status](https://coveralls.io/repos/khanghoang/rea-project/badge.svg?branch=master)](https://coveralls.io/r/khanghoang/rea-project?branch=master)
 
 ### Requirements
