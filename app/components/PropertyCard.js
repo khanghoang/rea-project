@@ -5,6 +5,9 @@ import classnames from 'classnames';
 export default class PropertyCard extends Component {
 
   onClick = (e) => {
+    if (this.props.disabledButton) {
+      return;
+    }
     if (!this.props.isSaved) {
       this.props.onClickSave && this.props.onClickSave(this.props.id);
     } else {
