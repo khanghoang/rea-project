@@ -1,4 +1,5 @@
 # 🦄 rea-project
+[![Coverage Status](https://coveralls.io/repos/khanghoang/rea-project/badge.svg?branch=master)](https://coveralls.io/r/khanghoang/rea-project?branch=master)
 
 ### Requirements
 - node (v5.0.0)
