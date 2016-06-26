@@ -40,6 +40,25 @@ describe('<PropertyCard />', () => {
     expect(propertyCard.find('.add-remove-button')).to.exist;
   });
 
+  it('disables button when props disabledButton is true', () => {
+    const propertyCard = mount(
+      <PropertyCard
+        disabledButton={true}
+        />
+    )
+    expect(propertyCard.find('.add-remove-button')).to.have.className('button-disable');
+  });
+
+  it('disables button when props disabledButton is true', () => {
+    const title = 'title';
+    const propertyCard = mount(
+      <PropertyCard
+        title={title}
+        />
+    )
+    expect(propertyCard.find('.add-remove-button').text()).to.equal(title);
+  });
+
   it('should call remove callback if property is SAVED', () => {
     const cb = spy();
     const propertyCard = mount(

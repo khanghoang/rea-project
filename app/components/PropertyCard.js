@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import classnames from 'classnames';
 
 export default class PropertyCard extends Component {
 
@@ -12,13 +13,29 @@ export default class PropertyCard extends Component {
   }
 
   render() {
-    const addOrRemoveButton = (
-      <div
-        className={`add-remove-button button ${this.props.isSaved ? 'remove-button' : 'add-button'}`}
-        onClick={this.onClick}>
-        {this.props.isSaved ? 'Remove' : 'Add'}
-      </div>
-    );
+    const addOrRemoveButton = () => {
+      const classes = classnames(
+        "add-remove-button button",
+        {
+          'remove-button': this.props.isSaved,
+          'add-button': !this.props.isSaved,
+          'button-disable': this.props.disabledButton,
+        }
+      );
+
+      let title = this.props.isSaved ? 'Remove' : 'Add';
+      if (this.props.title) {
+        title = this.props.title;
+      }
+
+      return (
+        <div
+          className={classes}
+          onClick={this.onClick}>
+          {title}
+        </div>
+      )
+    }
 
     return (
       <div
@@ -38,7 +55,7 @@ export default class PropertyCard extends Component {
         </div>
         <div className='property-information'>
           <span>Price: {this.props.price || 'TBD'}</span>
-          { this.props.showButton ? addOrRemoveButton : (<div></div>) }
+          { this.props.showButton ? addOrRemoveButton() : null}
         </div>
       </div>
     )
@@ -51,9 +68,12 @@ PropertyCard.propTypes = {
   agencyLogo: React.PropTypes.string,
   mainImage: React.PropTypes.string,
   price: React.PropTypes.string,
-  showButton: React.PropTypes.bool
+  showButton: React.PropTypes.bool,
+  buttonTitle: React.PropTypes.string,
+  disabledButton: React.PropTypes.bool
 }
 
 PropertyCard.defaultProps = {
-  showButton: true
+  showButton: true,
+  disabledButton: false
 }
