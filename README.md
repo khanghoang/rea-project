@@ -19,6 +19,9 @@
  
 ### Features:
 - Results and saved list:  
+<p>
+  <img src="https://cloud.githubusercontent.com/assets/3213579/16363847/5c13988c-3c01-11e6-83a8-dd31b268fc06.gif">
+</p>
 
 - Treat add/remove as async actions and also handle their states:  
 <img src="https://cloud.githubusercontent.com/assets/3213579/16363766/13f839e2-3bff-11e6-8830-b68fc1ed7212.gif" width="400">
