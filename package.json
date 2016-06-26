@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --inline --no-info",
-    "test": "mocha --compilers js:babel-register --require test/env.js test/*/** -w",
+    "test": "mocha --compilers js:babel-register --require test/env.js test/*/**",
+    "test:dev": "mocha --compilers js:babel-register --require test/env.js test/*/** -w",
     "check-coverage": "istanbul cover _mocha -- --compilers js:babel-register --require test/env.js test/*/** app/**/*.js --report text-summary --dir ./coverage",
     "validate": "npm-run-all --parallel check-coverage",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
