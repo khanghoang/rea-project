@@ -49,7 +49,7 @@ describe('<ListPropertyContainer />', () => {
     expect(list.find('.property-card-wrapper').length).to.equal(1);
   });
 
-  it('should show 2 properties after save first property', () => {
+  it('should show 2 properties in save list after save first property', () => {
     const list = mount(
       <Provider store={store}>
         <ListPropertyContainerConnnect />
@@ -61,6 +61,10 @@ describe('<ListPropertyContainer />', () => {
 
     // because saving card is async
     setTimeout(() => {
+
+      // switch to saved list 
+      list.find('.toggle-button').simulate('click');
+
       expect(list.find('.property-card-wrapper').length).to.equal(2);
     }, 0)
   });
