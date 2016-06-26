@@ -7,18 +7,21 @@
     "start": "webpack-dev-server --hot --inline --no-info",
     "test": "mocha --compilers js:babel-register --require test/env.js test/*/** -w",
     "check-coverage": "istanbul cover _mocha -- --compilers js:babel-register --require test/env.js test/*/** app/**/*.js --report text-summary --dir ./coverage",
-    "validate": "npm-run-all --parallel check-coverage"
+    "validate": "npm-run-all --parallel check-coverage",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "author": "hoangtrieukhang@gmail.com",
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.4.1",
+    "classnames": "^2.2.5",
     "lodash": "^4.13.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
@@ -30,6 +33,7 @@
     "babel-preset-stage-1": "^6.5.0",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.5.0",
+    "coveralls": "^2.11.9",
     "css-loader": "^0.23.1",
     "enzyme": "^2.3.0",
     "file-loader": "^0.8.5",
