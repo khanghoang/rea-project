@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import ListPropertyContainerConnnect, {ListPropertyContainer} from '../../app/containers/ListPropertyContainer';
 import { expect } from 'chai';
 import PropertyCard from '../../app/components/PropertyCard';
-
 import configureStore from '../../app/configureStore';
 let store;
 
@@ -44,7 +43,7 @@ describe('<ListPropertyContainer />', () => {
     setTimeout(() => {
       expect(list.find('.property-card-wrapper')).to.have.length(3);
       done();
-    }, 200)
+    }, 100)
   });
 
   it('should show 1 properties when switching to show saved property', (done) => {
@@ -77,8 +76,8 @@ describe('<ListPropertyContainer />', () => {
         list.find('.toggle-button').first().simulate('click');
         expect(list.find('.property-card-wrapper').length).to.equal(2);
         done();
-      }, 500);
-    }, 500)
+      }, 100);
+    }, 100)
   });
 
   it('hides the add button on the saved property', (done) => {
@@ -99,9 +98,9 @@ describe('<ListPropertyContainer />', () => {
         const card = list.find('.property-card-wrapper').first();
         expect(card.find('.add-remove-button')).to.have.length(0);
         done();
-      }, 500)
+      }, 100)
 
-    }, 500)
+    }, 100)
   });
 
   it('should show 0 property after remove the only one saved property', (done) => {
@@ -121,9 +120,9 @@ describe('<ListPropertyContainer />', () => {
       setTimeout(() => {
         expect(list.find('.property-card-wrapper')).to.have.length(0);
         done();
-      }, 500);
+      }, 100);
 
-    }, 500)
+    }, 100)
   });
 
 });
