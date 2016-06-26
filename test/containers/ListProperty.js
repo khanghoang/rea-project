@@ -134,10 +134,9 @@ describe('<ListPropertyContainer />', () => {
       </Provider>
     );
 
-    window.__deplay = true;
-
     // because saving card is async
     setTimeout(() => {
+      window.__deplay = true;
       // simulate to add
       list.find('.property-card-wrapper').first().find('.add-remove-button').first().simulate('click');
       setTimeout(() => {
@@ -155,10 +154,9 @@ describe('<ListPropertyContainer />', () => {
       </Provider>
     );
 
-    window.__deplay = true;
-
     // because saving card is async
     setTimeout(() => {
+      window.__deplay = true;
       // show saved list
       list.find('.toggle-button').first().simulate('click');
       // simulate to remove
@@ -168,6 +166,50 @@ describe('<ListPropertyContainer />', () => {
         expect(button.text()).to.equal('Removing...');
         done();
       }, 200);
+    }, 100)
+  });
+
+  it(`should change property's title if there is error while ADDING`, (done) => {
+    const list = mount(
+      <Provider store={store}>
+        <ListPropertyContainerConnnect />
+      </Provider>
+    );
+
+    // because saving card is async
+    setTimeout(() => {
+      // set to make request fail
+      window.__setFailure = true;
+      // simulate to add
+      list.find('.property-card-wrapper').first().find('.add-remove-button').first().simulate('click');
+      setTimeout(() => {
+        const button = list.find('.property-card-wrapper').first().find('.add-remove-button').first();
+        expect(button.text()).to.equal('Oops, add again?');
+        done();
+      }, 100);
+    }, 100)
+  });
+
+  it(`should change property's title if there is error while REMOVING`, (done) => {
+    const list = mount(
+      <Provider store={store}>
+        <ListPropertyContainerConnnect />
+      </Provider>
+    );
+
+    // because saving card is async
+    setTimeout(() => {
+      // set to make request fail
+      window.__setFailure = true;
+      // show saved list
+      list.find('.toggle-button').first().simulate('click');
+      // simulate to add
+      list.find('.property-card-wrapper').first().find('.add-remove-button').first().simulate('click');
+      setTimeout(() => {
+        const button = list.find('.property-card-wrapper').first().find('.add-remove-button').first();
+        expect(button.text()).to.equal('Oops, remove again?');
+        done();
+      }, 100);
     }, 100)
   });
 

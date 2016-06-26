@@ -1,3 +1,5 @@
+import Promise from 'bluebird';
+
 export default function promiseMiddleware ({dispatch, getState}) {
   return next => action => {
     const { promise, types, ...rest } = action;

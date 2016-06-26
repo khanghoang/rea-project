@@ -76,9 +76,7 @@ export class ListPropertyContainer extends Component {
     this && this.forceUpdate();
 
     savePromise
-    .catch(err => {
-      console.log('therer is an error');
-    })
+    .catch(err => console.log)
     .finally(() => {
       // FIXME: need to check if this component is unmounted
       this && this.forceUpdate();
@@ -94,9 +92,7 @@ export class ListPropertyContainer extends Component {
     this && this.forceUpdate();
 
     removePromise
-    .catch(err => {
-      console.log('therer is an error');
-    })
+    .catch(err => console.log)
     .finally(() => {
       // FIXME: need to check if this component is unmounted
       this && this.forceUpdate();
