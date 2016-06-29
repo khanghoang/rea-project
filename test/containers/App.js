@@ -4,6 +4,7 @@ import {
 import Root from '../../app/containers/Root';
 import { expect } from 'chai';
 import React from 'react';
+import sleep from '../utils/sleep';
 
 describe('<Root />', () => {
   it('should render main app component', () => {
@@ -11,25 +12,23 @@ describe('<Root />', () => {
     expect(root.find('.main-app')).to.exist;
   });
 
-  it('changes global variable when click SET DELAY button', (done) => {
+  it('changes global variable when click SET DELAY button', async () => {
     const root = mount(<Root />);
-    setTimeout(() => {
-      root.find('.enable-delay-button').simulate('click');
-      setTimeout(() => {
-        expect(window.__deplay).to.be.true;
-        done();
-      }, 0);
-    }, 0)
+
+    await sleep();
+    root.find('.enable-delay-button').simulate('click');
+
+    await sleep();
+    expect(window.__deplay).to.be.true;
   });
 
-  it('changes global variable when click SET FAILURE button', (done) => {
+  it('changes global variable when click SET FAILURE button', async () => {
     const root = mount(<Root />);
-    setTimeout(() => {
-      root.find('.enable-failure-button').simulate('click');
-      setTimeout(() => {
-        expect(window.__setFailure).to.be.true;
-        done();
-      }, 0);
-    }, 0)
+
+    await sleep();
+    root.find('.enable-failure-button').simulate('click');
+
+    await sleep();
+    expect(window.__setFailure).to.be.true;
   });
 });
