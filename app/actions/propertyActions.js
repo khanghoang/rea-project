@@ -7,8 +7,11 @@ export const GET_PROPERTY_LIST_SUCCESS = 'GET_PROPERTY_LIST_SUCCESS';
 export const GET_PROPERTY_LIST_FAILURE = 'GET_PROPERTY_LIST_FAILURE';
 
 const timeout = () => {
-  return window.__deplay ? 3000 : 0;
-}
+  if (window.__deplay) {
+    return 3000;
+  }
+  return 0;
+};
 
 const handler = (resolve, reject) => {
   if (window.__setFailure) {
