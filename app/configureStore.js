@@ -9,7 +9,12 @@ import thunk from 'redux-thunk';
 const store = createStore(reducers);
 
 const configureStore = () => {
-  const middlewares = [thunk, promisesMiddleware]
+
+  const logger = store => next => action => {
+    console.log(action);
+  }
+
+  const middlewares = [thunk, promisesMiddleware, logger];
   const store = createStore(
     reducers,
     applyMiddleware(...middlewares)
