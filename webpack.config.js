@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var TransformFlowStripTypes = require('transform-flow-strip-types');
 
 var query = {
   presets: ['es2015', 'react', 'stage-1']
@@ -41,7 +42,8 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new TransformFlowStripTypes()
   ]
 
 }

@@ -1,3 +1,4 @@
+/* @flow */
 import Promise from 'bluebird';
 import _ from 'lodash';
 import mockData from '../mockData/listProperties';
@@ -6,14 +7,21 @@ export const GET_PROPERTY_LIST = 'GET_PROPERTY_LIST';
 export const GET_PROPERTY_LIST_SUCCESS = 'GET_PROPERTY_LIST_SUCCESS';
 export const GET_PROPERTY_LIST_FAILURE = 'GET_PROPERTY_LIST_FAILURE';
 
-const timeout = () => {
+type Action = {
+  type?: string,
+  types?: string | Array<string>,
+  promise?: Promise<any>,
+  data?: any
+};
+
+const timeout = (): number => {
   if (window.__deplay) {
     return 3000;
   }
   return 0;
 };
 
-const handler = (resolve, reject) => {
+const handler = (resolve, reject): function => {
   if (window.__setFailure) {
     return function() {
       reject(new Error('There is an error, please try again'))
@@ -22,7 +30,7 @@ const handler = (resolve, reject) => {
   return resolve;
 }
 
-const parseListProperty = (res) => {
+const parseListProperty = (res): Object => {
 
   const saved = _.reduce(res.saved, (acc, p) => {
 
@@ -48,7 +56,7 @@ const listProperties = parseListProperty(mockData);
 
 
 // for fetch list property request
-const listPropertiesFromRemote = (res) => {
+const listPropertiesFromRemote = (res): Object => {
 
   const transform = (arr) => {
     return _.reduce(arr, (acc, p) => {
@@ -64,7 +72,7 @@ const listPropertiesFromRemote = (res) => {
   return _.assign({}, {results: results}, {saved: saved});
 }
 
-export const fetchPropertyList = () => {
+export const fetchPropertyList = (): Action => {
 
   return {
     types: [
@@ -86,7 +94,7 @@ export const SAVE_PROPERTY = 'SAVE_PROPERTY';
 export const SAVE_PROPERTY_SUCCESS = 'SAVE_PROPERTY_SUCCESS';
 export const SAVE_PROPERTY_FAILURE = 'SAVE_PROPERTY_FAILURE';
 
-export const saveProperty = (propertyID) => {
+export const saveProperty = (propertyID: string): Action => {
   return {
     types: [
       SAVE_PROPERTY,
@@ -107,7 +115,7 @@ export const UNSAVE_PROPERTY = 'UNSAVE_PROPERTY';
 export const UNSAVE_PROPERTY_SUCCESS = 'UNSAVE_PROPERTY_SUCCESS';
 export const UNSAVE_PROPERTY_FAILURE = 'UNSAVE_PROPERTY_FAILURE';
 
-export const unsaveProperty = (propertyID) => {
+export const unsaveProperty = (propertyID: string): Action => {
   return {
     types: [
       UNSAVE_PROPERTY,
