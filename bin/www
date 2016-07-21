@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+require('babel-register');
+
+var app = require('../server');
+var http = require('http');
+
+var server = http.createServer(app);
+
+server.listen(port);
+server.on('listening', function() {
+  console.log('Start on port ' + port);
+});
