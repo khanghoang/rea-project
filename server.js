@@ -1,17 +1,14 @@
-require("babel-register");
+global.window = {};
+
 const path = require('path')
-const Express = require('express')
+const express = require('express')
 const React = require('react')
-const configureStore = require('./app/configureStore')
-const { Provider } = require('react-redux')
-const Root = require('./app/containers/Root')
+import configureStore from './app/configureStore'
+import { Provider } from 'react-redux'
+import Root from './app/containers/Root'
 const {renderToString} = require('react-dom/server')
 
-const app = Express()
-const port = 3000
-
-// This is fired every time the server side receives a request
-app.use(handleRender)
+const app = express()
 
 // We are going to fill these out in the sections to follow
 function handleRender(req, res) {
@@ -50,4 +47,7 @@ function renderFullPage(html, initialState) {
     `
 }
 
-app.listen(port);
+app.get('/', handleRender)
+
+// export default express();
+module.exports = app;

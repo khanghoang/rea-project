@@ -12,8 +12,8 @@ const configureStore = (initialState) => {
   const middlewares = [thunk, promisesMiddleware]
   const store = createStore(
     reducers,
-    applyMiddleware(...middlewares),
-    initialState
+    initialState,
+    applyMiddleware(...middlewares)
   )
 
   return store;

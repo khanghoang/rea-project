@@ -7,7 +7,7 @@ var http = require('http');
 
 var server = http.createServer(app);
 
-server.listen(port);
+server.listen(3000);
 server.on('listening', function() {
-  console.log('Start on port ' + port);
+  console.log('Start on port 3000');
 });
