@@ -6,10 +6,19 @@ const React = require('react')
 import configureStore from './app/configureStore'
 import { Provider } from 'react-redux'
 import Root from './app/containers/Root'
-const {renderToString} = require('react-dom/server')
+import {renderToString} from 'react-dom/server'
+import {
+  fetchPropertyList,
+} from './app/actions/propertyActions';
 
 const app = express()
 app.use(express.static(path.join(__dirname, 'dist')));
+
+function fetchComponentData(dispatch, components, params) {
+  const needs = [fetchPropertyList]
+  const promises = needs.map(need => dispatch(need(params)));
+  return Promise.all(promises);
+}
 
 // We are going to fill these out in the sections to follow
 function handleRender(req, res) {
@@ -18,13 +27,18 @@ function handleRender(req, res) {
   const store = configureStore({})
 
   // Render the component to a string
-  const html = renderToString(Root(store))
+  fetchComponentData(store.dispatch, [<Root />], {})
+    .then(() => {
+      return renderToString(Root(store))
+    })
+    .then(html => {
+      // Grab the initial state from our Redux store
+      const initialState = store.getState()
 
-  // Grab the initial state from our Redux store
-  const initialState = store.getState()
-
-  // Send the rendered page back to the client
-  res.send(renderFullPage(html, initialState))
+      // Send the rendered page back to the client
+      res.send(renderFullPage(html, initialState))
+    })
+    .catch(console.log)
 }
 
 function renderFullPage(html, initialState) {
