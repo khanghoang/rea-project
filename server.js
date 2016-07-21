@@ -9,18 +9,16 @@ import Root from './app/containers/Root'
 const {renderToString} = require('react-dom/server')
 
 const app = express()
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // We are going to fill these out in the sections to follow
 function handleRender(req, res) {
+
   // Create a new Redux store instance
   const store = configureStore({})
 
   // Render the component to a string
-  const html = renderToString(
-    <Provider store={store}>
-      <Root />
-    </Provider>
-  )
+  const html = renderToString(Root(store))
 
   // Grab the initial state from our Redux store
   const initialState = store.getState()
@@ -31,19 +29,21 @@ function handleRender(req, res) {
 
 function renderFullPage(html, initialState) {
   return `
-    <!doctype html>
-    <html>
-      <head>
-        <title>Redux Universal Example</title>
-      </head>
-      <body>
-        <div id="root">${html}</div>
-        <script>
-          window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
-        </script>
-        <script src="/static/bundle.js"></script>
-      </body>
-    </html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>REA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+      <div id='container'>${html}</div>
+  </body>
+  <script>
+    window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
+  </script>
+  <script src="app.js"></script>
+</html>
     `
 }
 
