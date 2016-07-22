@@ -42,10 +42,6 @@ export class ListPropertyContainer extends Component {
     this.promises = {};
   }
 
-  static needs = [
-    fetchPropertyList
-  ]
-
   componentDidMount() {
     if (!this.props.fetchPropertyList ) {
       return;
