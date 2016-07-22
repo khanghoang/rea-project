@@ -16,6 +16,9 @@ export default function promiseMiddleware ({dispatch, getState}) {
       finalPromise = promise(getState());
     }
 
+    window.promises = window.promises || [];
+    window.promises.push(finalPromise);
+
     return finalPromise
       .then(result => {
         dispatch({ ...rest, data: result, type: SUCCESS })
@@ -25,6 +28,8 @@ export default function promiseMiddleware ({dispatch, getState}) {
         dispatch({ ...rest, error, type: FAILURE })
         return Promise.reject(error);
       })
-
+      .finally(() => {
+        window.promises = window.promises.filter(p => p !== finalPromise);
+      })
   }
 }

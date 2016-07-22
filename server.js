@@ -11,6 +11,26 @@ import {
   fetchPropertyList,
 } from './app/actions/propertyActions';
 
+// handle enzyme
+var jsdom = require('jsdom').jsdom;
+import {mount} from 'enzyme';
+
+var exposedProperties = ['window', 'navigator', 'document'];
+
+global.document = jsdom('');
+global.window = document.defaultView;
+Object.keys(document.defaultView).forEach((property) => {
+  if (typeof global[property] === 'undefined') {
+    exposedProperties.push(property);
+    global[property] = document.defaultView[property];
+  }
+});
+
+global.navigator = {
+  userAgent: 'node.js'
+};
+// end handle emzyme
+
 const app = express()
 app.use(express.static(path.join(__dirname, 'dist')));
 
@@ -25,20 +45,15 @@ function handleRender(req, res) {
 
   // Create a new Redux store instance
   const store = configureStore({})
+  const component = mount(Root(store))
 
-  // Render the component to a string
-  fetchComponentData(store.dispatch, [<Root />], {})
-    .then(() => {
-      return renderToString(Root(store))
-    })
-    .then(html => {
-      // Grab the initial state from our Redux store
+  let interval = setInterval(() => {
+    if (window.promises.length === 0) {
       const initialState = store.getState()
-
-      // Send the rendered page back to the client
-      res.send(renderFullPage(html, initialState))
-    })
-    .catch(console.log)
+      res.send(renderFullPage(component.html(), initialState))
+      clearInterval(interval);
+    }
+  }, 10);
 }
 
 function renderFullPage(html, initialState) {
