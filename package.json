@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --no-info",
+    "start": "./bin/www",
+    "dev": "webpack-dev-server --hot --inline --no-info",
     "test": "mocha --compilers js:babel-register --require babel-polyfill --reporter progress --require test/env.js test/*/**",
     "test:dev": "mocha --compilers js:babel-register --require babel-polyfill --reporter progress --require test/env.js test/*/** -w",
     "coverage": "istanbul cover _mocha -- --compilers js:babel-register --require babel-polyfill --reporter progress --require test/env.js test/*/** app/**/*.js --report text-summary --dir ./coverage",

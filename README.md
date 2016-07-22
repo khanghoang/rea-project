@@ -10,7 +10,7 @@
 - cd in the project directory
 - Run `npm install`, wait until it finishs installing all dependencies.
 - Run `npm start`
-- Go to `http://localhost:8080/` and enjoy!!! 😎
+- Go to `http://localhost:3333/` and enjoy!!! 😎
 
 ### Other commands:
 #### Test:
