@@ -8,10 +8,11 @@ import thunk from 'redux-thunk';
 
 const store = createStore(reducers);
 
-const configureStore = () => {
+const configureStore = (initialState) => {
   const middlewares = [thunk, promisesMiddleware]
   const store = createStore(
     reducers,
+    initialState,
     applyMiddleware(...middlewares)
   )
 
