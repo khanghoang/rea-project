@@ -6,8 +6,9 @@ var app = require('../server');
 var http = require('http');
 
 var server = http.createServer(app);
+var port = process.env.PORT || 3333;
 
-server.listen(3333);
+server.listen(port);
 server.on('listening', function() {
-  console.log('Start on port 3333');
+  console.log('Start on port ' + port);
 });
