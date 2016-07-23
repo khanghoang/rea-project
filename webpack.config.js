@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var query = {
   presets: ['es2015', 'react', 'stage-1']
@@ -33,7 +34,13 @@ module.exports = {
         test: /\.html$/,
         loader: "file?name=[name].[ext]",
       },
-      { test: /\.css$/, loader: "style-loader!css-loader"},
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract(
+          "style-loader",
+          "css-loader"
+        )
+      },
       { test: /\.png$/, loader: "url-loader?limit=100000"},
       { test: /\.(ttf|otf|eot|svg|woff(2)?)$/, loader: "url-loader?limit=100000"},
       { test: /\.(jpg|gif)$/, loader: "file-loader" }
@@ -41,7 +48,8 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin("main.css")
   ]
 
 }
