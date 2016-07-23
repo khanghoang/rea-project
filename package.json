@@ -10,7 +10,8 @@
     "test:dev": "mocha --compilers js:babel-register --require babel-polyfill --reporter progress --require test/env.js test/*/** -w",
     "coverage": "istanbul cover _mocha -- --compilers js:babel-register --require babel-polyfill --reporter progress --require test/env.js test/*/** app/**/*.js --report text-summary --dir ./coverage",
     "validate": "npm-run-all --parallel check-coverage",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "postinstall": "./node_modules/webpack/bin/webpack.js --config webpack.config.prod.js --optimize-minimize --optimize-occurrence-order --optimize-dedupe"
   },
   "author": "hoangtrieukhang@gmail.com",
   "license": "MIT",
@@ -30,7 +31,15 @@
     "react-router": "^2.4.1",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "style-loader": "^0.13.1",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5",
+    "url-loader": "^0.5.7",
+    "babel-loader": "^6.2.4",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "babel-polyfill": "^6.9.1",
+    "webpack": "^1.13.1"
   },
   "devDependencies": {
     "babel-loader": "^6.2.4",

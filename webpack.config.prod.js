@@ -10,8 +10,7 @@ module.exports = {
 
   context: __dirname + '/app',
   entry: {
-    javascript: './app.js',
-    html: "./index.html" // disable this on when run with server sider rendering
+    javascript: './app.js'
   },
 
   output: {
@@ -19,7 +18,7 @@ module.exports = {
     path: __dirname + '/dist'
   },
 
-  devtool: 'eval',
+  devtool: 'cheap-module-source-map',
 
   module: {
     loaders: [
@@ -27,7 +26,7 @@ module.exports = {
         // babel
         test: /\.js/,
         exclude: /node_modules/,
-        loaders: ['react-hot','babel-loader?'+JSON.stringify(query)],
+        loaders: ['babel-loader?'+JSON.stringify(query)],
         include: path.join(__dirname, 'app')
       },
       {
@@ -48,8 +47,12 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin("main.css")
+    new ExtractTextPlugin("main.css"),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
   ]
 
 }
