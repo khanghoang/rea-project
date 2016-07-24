@@ -16,7 +16,7 @@ const timeout = () => {
 const handler = (resolve, reject) => {
   if (window.__setFailure) {
     return function() {
-      reject(new Error('There is an error, please try again'))
+      reject(new Error('There is an error, please try again'));
     }
   }
   return resolve;
